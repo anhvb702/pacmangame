@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Classic Pac-Man arcade game — play in your browser with retro graphics, ghost AI, and synthesized sound effects." />
+  <title>PAC-MAN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ── Game Container ─────────────────────────── -->
+<div class="game-wrapper" id="gameWrapper">
+  <div class="hud">
+    <div class="hud-score">SCORE <span id="scoreVal">0</span></div>
+    <div class="hud-lives" id="livesContainer"></div>
+    <div class="hud-level">LVL <span id="levelVal">1</span></div>
+    <button id="muteBtn" class="mute-btn" onclick="SFX.toggle()">🔊</button>
+  </div>
+
+  <canvas id="gameCanvas"></canvas>
+  <div class="scanlines"></div>
+
+  <!-- Start Screen -->
+  <div class="overlay" id="startScreen">
+    <h1>PAC-MAN</h1>
+    <p>Arrow Keys / WASD to move</p>
+    <p>Eat all dots to advance</p>
+    <p>Eat power pellets to chase ghosts!</p>
+    <p class="blink">PRESS ANY KEY TO START</p>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div class="overlay hidden" id="gameOverScreen">
+    <h1 class="game-over-text">GAME OVER</h1>
+    <div class="high-score">SCORE: <span id="finalScore">0</span></div>
+    <div class="high-score">HIGH SCORE: <span id="highScore">0</span></div>
+    <p class="blink" style="margin-top:24px">PRESS ANY KEY TO RESTART</p>
+  </div>
+
+  <!-- Win Screen -->
+  <div class="overlay hidden" id="winScreen">
+    <h1>🎉 YOU WIN!</h1>
+    <div class="high-score">FINAL SCORE: <span id="winScore">0</span></div>
+    <p class="blink">PRESS ANY KEY TO PLAY AGAIN</p>
+  </div>
+</div>
+
+<!-- ── Mobile D-pad ───────────────────────────── -->
+<div class="mobile-controls">
+  <div class="dpad">
+    <button class="up" id="btnUp">▲</button>
+    <button class="left" id="btnLeft">◀</button>
+    <button class="right" id="btnRight">▶</button>
+    <button class="down" id="btnDown">▼</button>
+  </div>
+</div>
+
+<!-- ── Scripts (order matters) ────────────────── -->
+<script src="js/constants.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/pacman.js"></script>
+<script src="js/ghost.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/game.js"></script>
+<script src="js/input.js"></script>
+
+</body>
+</html>
