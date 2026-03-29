@@ -1,0 +1,192 @@
+/* ══════════════════════════════════════════════════
+   PAC-MAN  ·  Styles
+   ══════════════════════════════════════════════════ */
+
+/* ── Reset & Base ─────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a1a;
+  color: #e0e0e0;
+  font-family: 'Press Start 2P', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Game Wrapper (glow frame) ────────────────── */
+.game-wrapper {
+  position: relative;
+  padding: 24px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #0d0d2b, #111133);
+  box-shadow:
+    0 0 40px rgba(33, 33, 222, 0.25),
+    0 0 80px rgba(33, 33, 222, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ── HUD ──────────────────────────────────────── */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 4px 12px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.hud-score { color: #fff; }
+.hud-score span { color: #ffcc00; }
+
+.hud-lives { display: flex; gap: 6px; }
+.hud-lives .life {
+  width: 18px;
+  height: 18px;
+  background: #ffcc00;
+  border-radius: 50%;
+  clip-path: polygon(100% 50%, 50% 50%, 30% 5%, 0% 50%, 30% 95%, 50% 50%);
+  transform: scaleX(-1);
+}
+
+.hud-level { color: #4fc3f7; }
+
+.mute-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #aaa;
+  padding: 0 4px;
+}
+
+/* ── Canvas ────────────────────────────────────── */
+#gameCanvas {
+  display: block;
+  border-radius: 4px;
+  image-rendering: pixelated;
+}
+
+/* ── Overlay Screens ──────────────────────────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 5, 20, 0.88);
+  border-radius: 16px;
+  z-index: 10;
+  transition: opacity 0.3s;
+}
+
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay h1 {
+  font-size: 28px;
+  color: #ffcc00;
+  text-shadow: 0 0 20px #ffcc00, 0 0 40px #ff8800;
+  margin-bottom: 20px;
+}
+
+.overlay p {
+  font-size: 10px;
+  color: #8888cc;
+  margin-bottom: 8px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.overlay .blink {
+  animation: blink 1s step-end infinite;
+  color: #fff;
+  font-size: 11px;
+  margin-top: 24px;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.overlay .game-over-text {
+  color: #ff4444;
+  text-shadow: 0 0 20px #ff4444;
+}
+
+.overlay .high-score {
+  color: #4fc3f7;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+/* ── Mobile Controls (D-pad) ──────────────────── */
+.mobile-controls {
+  display: none;
+  margin-top: 16px;
+  gap: 4px;
+}
+
+.mobile-controls button {
+  width: 56px;
+  height: 56px;
+  font-size: 22px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: #ccc;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.mobile-controls button:active {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.dpad {
+  display: grid;
+  grid-template-areas:
+    ". up ."
+    "left . right"
+    ". down .";
+  gap: 4px;
+}
+
+.dpad .up    { grid-area: up; }
+.dpad .down  { grid-area: down; }
+.dpad .left  { grid-area: left; }
+.dpad .right { grid-area: right; }
+
+@media (max-width: 600px) or (pointer: coarse) {
+  .mobile-controls { display: flex; }
+}
+
+/* ── CRT Scanline Overlay ─────────────────────── */
+.scanlines {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  z-index: 5;
+}
